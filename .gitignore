@@ -1,12 +1,58 @@
-# Byte-compiled / optimized / DLL files
+
+# D:\Documents\GitHub\MineCraft\.gitignore
+
+# exclude everything except text-based OC directories
+/*
+!/ipynb
+!/load_magic
+!/ps1
+!/py
+!/saves
+!/sh
+!/tests
+!/json
+
+# Ignore whole folders
+**/.git/
+saves/mp4
+
+# Ignore big files (GitHub will warn you when pushing files larger than 50 MB. You will not be allowed to
+# push files larger than 100 MB.) Tip: If you regularly push large files to GitHub, consider introducing
+# Git Large File Storage (Git LFS) as part of your workflow.
+mcstatus/
+mine-hack/
+
+# Exclude executables
+*.exe
+
+# Exclude secrets
+**/json/*_secret*.json
+**/json/*credential*.json
+saves/json/secrets.json
+
+# Exclude notebooks that I didn't make
+
+# Exclude JSON files that I didn't make
+
+# Exclude PowerShell scripts that I didn't make
+
+# Exclude other stuff I copied from someone else
+
+# Exclude Mac, Jupyter, R, and Octave admin files
+**/octave-workspace
+**/.ipynb_checkpoints/
+**/__pycache__/
+**/.Rproj.user/
+
+# Exclude Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+# Exclude C extensions
 *.so
 
-# Distribution / packaging
+# Exclude Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -27,17 +73,17 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# PyInstaller
+# Exclude PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
-# Installer logs
+# Exclude Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Exclude Unit test / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -51,57 +97,57 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# Translations
+# Exclude Translations
 *.mo
 *.pot
 
-# Django stuff:
+# Exclude Django stuff:
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-# Flask stuff:
+# Exclude Flask stuff:
 instance/
 .webassets-cache
 
-# Scrapy stuff:
+# Exclude Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
+# Exclude Sphinx documentation
 docs/_build/
 
-# PyBuilder
+# Exclude PyBuilder
 target/
 
-# Jupyter Notebook
+# Exclude Jupyter Notebook
 .ipynb_checkpoints
 
-# IPython
+# Exclude IPython
 profile_default/
 ipython_config.py
 
-# pyenv
+# Exclude pyenv
 .python-version
 
-# pipenv
+# Exclude pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+# Exclude PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
-# Celery stuff
+# Exclude Celery stuff
 celerybeat-schedule
 celerybeat.pid
 
-# SageMath parsed files
+# Exclude SageMath parsed files
 *.sage.py
 
-# Environments
+# Exclude Environments
 .env
 .venv
 env/
@@ -110,22 +156,20 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
+# Exclude Spyder project settings
 .spyderproject
 .spyproject
 
-# Rope project settings
+# Exclude Rope project settings
 .ropeproject
 
-# mkdocs documentation
+# Exclude mkdocs documentation
 /site
 
-# mypy
+# Exclude mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
+# Exclude Pyre type checker
 .pyre/
-mcstatus/
-mine-hack/
