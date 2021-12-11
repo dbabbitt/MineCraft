@@ -1,0 +1,116 @@
+nodedef> name VARCHAR,label VARCHAR,width DOUBLE,height DOUBLE,x DOUBLE,y DOUBLE,color VARCHAR,kind VARCHAR
+Red Dye,"Red Dye",10.0,10.0,-123.109795,329.4053,'0,0,0',"Primary"
+Poppy,"Poppy",10.0,10.0,-464.6133,380.46182,'0,0,0',
+Rose Bush,"Rose Bush",10.0,10.0,228.20778,415.76886,'0,0,0',
+Red Tulip,"Red Tulip",10.0,10.0,20.376028,573.1481,'0,0,0',
+Beetroot,"Beetroot",10.0,10.0,-272.54242,474.42218,'0,0,0',
+Orange Dye,"Orange Dye",10.0,10.0,-93.58846,1017.8247,'0,0,0',"Versatile"
+Orange Tulip,"Orange Tulip",10.0,10.0,-173.28223,1245.1437,'0,0,0',
+1 Red Dye and 1 Yellow Dye,"1 Red Dye and 1 Yellow Dye",10.0,10.0,-327.32428,771.80475,'0,0,0',
+Yellow Dye,"Yellow Dye",10.0,10.0,-744.4959,894.5181,'0,0,0',"Primary"
+Dandelion,"Dandelion",10.0,10.0,-624.49536,1115.0375,'0,0,0',
+Sunflower,"Sunflower",10.0,10.0,-1053.1962,722.73517,'0,0,0',
+Lime Dye,"Lime Dye",10.0,10.0,806.1871,-578.2324,'0,0,0',"Versatile"
+Sea Pickle (smelting),"Sea Pickle (smelting)",10.0,10.0,976.1978,-740.8216,'0,0,0',
+1 Green Dye and 1 White Dye,"1 Green Dye and 1 White Dye",10.0,10.0,754.13184,-451.12125,'0,0,0',
+Green Dye,"Green Dye",10.0,10.0,936.80615,-51.12154,'0,0,0',"Primary"
+White Dye,"White Dye",10.0,10.0,211.89334,-478.97095,'0,0,0',"Primary"
+Cactus (smelting),"Cactus (smelting)",10.0,10.0,1229.8203,-95.290085,'0,0,0',
+Cyan Dye,"Cyan Dye",10.0,10.0,744.0704,622.454,'0,0,0',"Secondary"
+1 Green Dye and 1 Blue Dye,"1 Green Dye and 1 Blue Dye",10.0,10.0,720.32306,354.73267,'0,0,0',
+Blue Dye,"Blue Dye",10.0,10.0,406.57944,201.19316,'0,0,0',"Primary"
+Light Blue Dye,"Light Blue Dye",10.0,10.0,1052.647,143.8873,'0,0,0',"Versatile"
+Blue Orchid,"Blue Orchid",10.0,10.0,1137.425,514.0472,'0,0,0',
+1 Blue Dye and 1 White Dye,"1 Blue Dye and 1 White Dye",10.0,10.0,660.3166,-177.46274,'0,0,0',
+Lapis Lazuli,"Lapis Lazuli",10.0,10.0,639.5785,106.8066,'0,0,0',
+Cornflower,"Cornflower",10.0,10.0,453.4032,490.34406,'0,0,0',
+Purple Dye,"Purple Dye",10.0,10.0,-248.33905,236.81616,'0,0,0',"Secondary"
+1 Red Dye and 1 Blue Dye,"1 Red Dye and 1 Blue Dye",10.0,10.0,48.469788,163.07158,'0,0,0',
+Magenta Dye,"Magenta Dye",10.0,10.0,-517.6067,-118.53429,'0,0,0',"Versatile"
+Lilac,"Lilac",10.0,10.0,-956.4139,-362.81293,'0,0,0',
+Allium,"Allium",10.0,10.0,-847.61383,-121.41838,'0,0,0',
+1 Purple Dye and 1 Pink Dye,"1 Purple Dye and 1 Pink Dye",10.0,10.0,-693.6584,209.92345,'0,0,0',
+Pink Dye,"Pink Dye",10.0,10.0,-684.83044,51.98133,'0,0,0',"Versatile"
+1 Red Dye, 1 Blue Dye, and 1 Pink Dye,"1 Red Dye, 1 Blue Dye, and 1 Pink Dye",10.0,10.0,-146.61441,24.637688,'0,0,0',
+2 Red Dye, 1 Blue Dye, and 1 White Dye,"2 Red Dye, 1 Blue Dye, and 1 White Dye",10.0,10.0,80.41789,-76.07953,'0,0,0',
+Peony,"Peony",10.0,10.0,-925.91547,89.619736,'0,0,0',
+Pink Tulip,"Pink Tulip",10.0,10.0,-1161.9595,-33.029427,'0,0,0',
+1 Red Dye and 1 White Dye,"1 Red Dye and 1 White Dye",10.0,10.0,-276.8054,-180.73329,'0,0,0',
+Brown Dye,"Brown Dye",10.0,10.0,595.0092,1146.7495,'0,0,0',"Primary"
+Cocoa Beans,"Cocoa Beans",10.0,10.0,233.81584,1286.1138,'0,0,0',
+Black Dye,"Black Dye",10.0,10.0,-597.48267,-700.3379,'0,0,0',"Primary"
+Ink Sac,"Ink Sac",10.0,10.0,-927.337,-780.95984,'0,0,0',
+Wither Rose,"Wither Rose",10.0,10.0,-718.60803,-961.6382,'0,0,0',
+Gray Dye,"Gray Dye",10.0,10.0,-69.03547,-836.42377,'0,0,0',"Secondary"
+1 Black Dye and 1 White Dye,"1 Black Dye and 1 White Dye",10.0,10.0,-231.94048,-574.23846,'0,0,0',
+Light Gray Dye,"Light Gray Dye",10.0,10.0,35.319706,-1018.8262,'0,0,0',"Versatile"
+Azure Blue,"Azure Blue",10.0,10.0,-260.53033,-1179.0769,'0,0,0',
+Oxeye Daisy,"Oxeye Daisy",10.0,10.0,31.744368,-1250.3177,'0,0,0',
+White Tulip,"White Tulip",10.0,10.0,329.9336,-1179.8945,'0,0,0',
+2 White Dye and 1 Black Dye,"2 White Dye and 1 Black Dye",10.0,10.0,-202.76245,-735.3818,'0,0,0',
+1 White Dye and 1 Gray Dye,"1 White Dye and 1 Gray Dye",10.0,10.0,236.96384,-818.38574,'0,0,0',
+Bone Meal,"Bone Meal",10.0,10.0,569.2862,-853.97394,'0,0,0',
+Lily of the Valley,"Lily of the Valley",10.0,10.0,5.0965953,-608.8146,'0,0,0',
+edgedef> node1,node2,weight DOUBLE,directed BOOLEAN,mixture_count INTEGER
+Red Dye,1 Red Dye and 1 Yellow Dye,1.0,true,1
+Red Dye,1 Red Dye and 1 Blue Dye,1.0,true,1
+Red Dye,1 Red Dye, 1 Blue Dye, and 1 Pink Dye,1.0,true,1
+Red Dye,2 Red Dye, 1 Blue Dye, and 1 White Dye,1.0,true,2
+Red Dye,1 Red Dye and 1 White Dye,1.0,true,1
+Poppy,Red Dye,1.0,true,
+Rose Bush,Red Dye,1.0,true,
+Red Tulip,Red Dye,1.0,true,
+Beetroot,Red Dye,1.0,true,
+Orange Tulip,Orange Dye,1.0,true,
+1 Red Dye and 1 Yellow Dye,Orange Dye,1.0,true,
+Yellow Dye,1 Red Dye and 1 Yellow Dye,1.0,true,1
+Dandelion,Yellow Dye,1.0,true,
+Sunflower,Yellow Dye,1.0,true,
+Sea Pickle (smelting),Lime Dye,1.0,true,
+1 Green Dye and 1 White Dye,Lime Dye,1.0,true,
+Green Dye,1 Green Dye and 1 White Dye,1.0,true,1
+Green Dye,1 Green Dye and 1 Blue Dye,1.0,true,1
+White Dye,1 Green Dye and 1 White Dye,1.0,true,1
+White Dye,1 Blue Dye and 1 White Dye,1.0,true,1
+White Dye,2 Red Dye, 1 Blue Dye, and 1 White Dye,1.0,true,1
+White Dye,1 Red Dye and 1 White Dye,1.0,true,1
+White Dye,1 Black Dye and 1 White Dye,1.0,true,1
+White Dye,2 White Dye and 1 Black Dye,1.0,true,2
+White Dye,1 White Dye and 1 Gray Dye,1.0,true,1
+Cactus (smelting),Green Dye,1.0,true,
+1 Green Dye and 1 Blue Dye,Cyan Dye,1.0,true,
+Blue Dye,1 Green Dye and 1 Blue Dye,1.0,true,1
+Blue Dye,1 Blue Dye and 1 White Dye,1.0,true,1
+Blue Dye,1 Red Dye and 1 Blue Dye,1.0,true,1
+Blue Dye,1 Red Dye, 1 Blue Dye, and 1 Pink Dye,1.0,true,1
+Blue Dye,2 Red Dye, 1 Blue Dye, and 1 White Dye,1.0,true,1
+Blue Orchid,Light Blue Dye,1.0,true,
+1 Blue Dye and 1 White Dye,Light Blue Dye,1.0,true,
+Lapis Lazuli,Blue Dye,1.0,true,
+Cornflower,Blue Dye,1.0,true,
+Purple Dye,1 Purple Dye and 1 Pink Dye,1.0,true,1
+1 Red Dye and 1 Blue Dye,Purple Dye,1.0,true,
+Lilac,Magenta Dye,1.0,true,
+Allium,Magenta Dye,1.0,true,
+1 Purple Dye and 1 Pink Dye,Magenta Dye,1.0,true,
+Pink Dye,1 Purple Dye and 1 Pink Dye,1.0,true,1
+Pink Dye,1 Red Dye, 1 Blue Dye, and 1 Pink Dye,1.0,true,1
+1 Red Dye, 1 Blue Dye, and 1 Pink Dye,Magenta Dye,1.0,true,
+2 Red Dye, 1 Blue Dye, and 1 White Dye,Magenta Dye,1.0,true,
+Peony,Pink Dye,1.0,true,
+Pink Tulip,Pink Dye,1.0,true,
+1 Red Dye and 1 White Dye,Pink Dye,1.0,true,
+Cocoa Beans,Brown Dye,1.0,true,
+Black Dye,1 Black Dye and 1 White Dye,1.0,true,1
+Black Dye,2 White Dye and 1 Black Dye,1.0,true,1
+Ink Sac,Black Dye,1.0,true,
+Wither Rose,Black Dye,1.0,true,
+Gray Dye,1 White Dye and 1 Gray Dye,1.0,true,1
+1 Black Dye and 1 White Dye,Gray Dye,1.0,true,
+Azure Blue,Light Gray Dye,1.0,true,
+Oxeye Daisy,Light Gray Dye,1.0,true,
+White Tulip,Light Gray Dye,1.0,true,
+2 White Dye and 1 Black Dye,Light Gray Dye,1.0,true,
+1 White Dye and 1 Gray Dye,Light Gray Dye,1.0,true,
+Bone Meal,White Dye,1.0,true,
+Lily of the Valley,White Dye,1.0,true,

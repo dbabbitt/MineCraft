@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2021-09-09">
+    <creator>NetworkX 2.5.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="1" title="mixture_count" type="long" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="kind" type="string" />
+    </attributes>
+    <nodes>
+      <node id="Red Dye" label="Red Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Poppy" label="Poppy" />
+      <node id="Rose Bush" label="Rose Bush" />
+      <node id="Red Tulip" label="Red Tulip" />
+      <node id="Beetroot" label="Beetroot" />
+      <node id="Orange Dye" label="Orange Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="Orange Tulip" label="Orange Tulip" />
+      <node id="1 Red Dye and 1 Yellow Dye" label="1 Red Dye and 1 Yellow Dye" />
+      <node id="Yellow Dye" label="Yellow Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Dandelion" label="Dandelion" />
+      <node id="Sunflower" label="Sunflower" />
+      <node id="Lime Dye" label="Lime Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="Sea Pickle (smelting)" label="Sea Pickle (smelting)" />
+      <node id="1 Green Dye and 1 White Dye" label="1 Green Dye and 1 White Dye" />
+      <node id="Green Dye" label="Green Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="White Dye" label="White Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Cactus (smelting)" label="Cactus (smelting)" />
+      <node id="Cyan Dye" label="Cyan Dye">
+        <attvalues>
+          <attvalue for="0" value="Secondary" />
+        </attvalues>
+      </node>
+      <node id="1 Green Dye and 1 Blue Dye" label="1 Green Dye and 1 Blue Dye" />
+      <node id="Blue Dye" label="Blue Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Light Blue Dye" label="Light Blue Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="Blue Orchid" label="Blue Orchid" />
+      <node id="1 Blue Dye and 1 White Dye" label="1 Blue Dye and 1 White Dye" />
+      <node id="Lapis Lazuli" label="Lapis Lazuli" />
+      <node id="Cornflower" label="Cornflower" />
+      <node id="Purple Dye" label="Purple Dye">
+        <attvalues>
+          <attvalue for="0" value="Secondary" />
+        </attvalues>
+      </node>
+      <node id="1 Red Dye and 1 Blue Dye" label="1 Red Dye and 1 Blue Dye" />
+      <node id="Magenta Dye" label="Magenta Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="Lilac" label="Lilac" />
+      <node id="Allium" label="Allium" />
+      <node id="1 Purple Dye and 1 Pink Dye" label="1 Purple Dye and 1 Pink Dye" />
+      <node id="Pink Dye" label="Pink Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" label="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" />
+      <node id="2 Red Dye, 1 Blue Dye, and 1 White Dye" label="2 Red Dye, 1 Blue Dye, and 1 White Dye" />
+      <node id="Peony" label="Peony" />
+      <node id="Pink Tulip" label="Pink Tulip" />
+      <node id="1 Red Dye and 1 White Dye" label="1 Red Dye and 1 White Dye" />
+      <node id="Brown Dye" label="Brown Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Cocoa Beans" label="Cocoa Beans" />
+      <node id="Black Dye" label="Black Dye">
+        <attvalues>
+          <attvalue for="0" value="Primary" />
+        </attvalues>
+      </node>
+      <node id="Ink Sac" label="Ink Sac" />
+      <node id="Wither Rose" label="Wither Rose" />
+      <node id="Gray Dye" label="Gray Dye">
+        <attvalues>
+          <attvalue for="0" value="Secondary" />
+        </attvalues>
+      </node>
+      <node id="1 Black Dye and 1 White Dye" label="1 Black Dye and 1 White Dye" />
+      <node id="Light Gray Dye" label="Light Gray Dye">
+        <attvalues>
+          <attvalue for="0" value="Versatile" />
+        </attvalues>
+      </node>
+      <node id="Azure Blue" label="Azure Blue" />
+      <node id="Oxeye Daisy" label="Oxeye Daisy" />
+      <node id="White Tulip" label="White Tulip" />
+      <node id="2 White Dye and 1 Black Dye" label="2 White Dye and 1 Black Dye" />
+      <node id="1 White Dye and 1 Gray Dye" label="1 White Dye and 1 Gray Dye" />
+      <node id="Bone Meal" label="Bone Meal" />
+      <node id="Lily of the Valley" label="Lily of the Valley" />
+    </nodes>
+    <edges>
+      <edge source="Red Dye" target="1 Red Dye and 1 Yellow Dye" id="0">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Red Dye" target="1 Red Dye and 1 Blue Dye" id="1">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Red Dye" target="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" id="2">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Red Dye" target="2 Red Dye, 1 Blue Dye, and 1 White Dye" id="3">
+        <attvalues>
+          <attvalue for="1" value="2" />
+        </attvalues>
+      </edge>
+      <edge source="Red Dye" target="1 Red Dye and 1 White Dye" id="4">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Poppy" target="Red Dye" id="5" />
+      <edge source="Rose Bush" target="Red Dye" id="6" />
+      <edge source="Red Tulip" target="Red Dye" id="7" />
+      <edge source="Beetroot" target="Red Dye" id="8" />
+      <edge source="Orange Tulip" target="Orange Dye" id="9" />
+      <edge source="1 Red Dye and 1 Yellow Dye" target="Orange Dye" id="10" />
+      <edge source="Yellow Dye" target="1 Red Dye and 1 Yellow Dye" id="11">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Dandelion" target="Yellow Dye" id="12" />
+      <edge source="Sunflower" target="Yellow Dye" id="13" />
+      <edge source="Sea Pickle (smelting)" target="Lime Dye" id="14" />
+      <edge source="1 Green Dye and 1 White Dye" target="Lime Dye" id="15" />
+      <edge source="Green Dye" target="1 Green Dye and 1 White Dye" id="16">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Green Dye" target="1 Green Dye and 1 Blue Dye" id="17">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="1 Green Dye and 1 White Dye" id="18">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="1 Blue Dye and 1 White Dye" id="19">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="2 Red Dye, 1 Blue Dye, and 1 White Dye" id="20">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="1 Red Dye and 1 White Dye" id="21">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="1 Black Dye and 1 White Dye" id="22">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="2 White Dye and 1 Black Dye" id="23">
+        <attvalues>
+          <attvalue for="1" value="2" />
+        </attvalues>
+      </edge>
+      <edge source="White Dye" target="1 White Dye and 1 Gray Dye" id="24">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Cactus (smelting)" target="Green Dye" id="25" />
+      <edge source="1 Green Dye and 1 Blue Dye" target="Cyan Dye" id="26" />
+      <edge source="Blue Dye" target="1 Green Dye and 1 Blue Dye" id="27">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Blue Dye" target="1 Blue Dye and 1 White Dye" id="28">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Blue Dye" target="1 Red Dye and 1 Blue Dye" id="29">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Blue Dye" target="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" id="30">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Blue Dye" target="2 Red Dye, 1 Blue Dye, and 1 White Dye" id="31">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Blue Orchid" target="Light Blue Dye" id="32" />
+      <edge source="1 Blue Dye and 1 White Dye" target="Light Blue Dye" id="33" />
+      <edge source="Lapis Lazuli" target="Blue Dye" id="34" />
+      <edge source="Cornflower" target="Blue Dye" id="35" />
+      <edge source="Purple Dye" target="1 Purple Dye and 1 Pink Dye" id="36">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="1 Red Dye and 1 Blue Dye" target="Purple Dye" id="37" />
+      <edge source="Lilac" target="Magenta Dye" id="38" />
+      <edge source="Allium" target="Magenta Dye" id="39" />
+      <edge source="1 Purple Dye and 1 Pink Dye" target="Magenta Dye" id="40" />
+      <edge source="Pink Dye" target="1 Purple Dye and 1 Pink Dye" id="41">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Pink Dye" target="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" id="42">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="1 Red Dye, 1 Blue Dye, and 1 Pink Dye" target="Magenta Dye" id="43" />
+      <edge source="2 Red Dye, 1 Blue Dye, and 1 White Dye" target="Magenta Dye" id="44" />
+      <edge source="Peony" target="Pink Dye" id="45" />
+      <edge source="Pink Tulip" target="Pink Dye" id="46" />
+      <edge source="1 Red Dye and 1 White Dye" target="Pink Dye" id="47" />
+      <edge source="Cocoa Beans" target="Brown Dye" id="48" />
+      <edge source="Black Dye" target="1 Black Dye and 1 White Dye" id="49">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Black Dye" target="2 White Dye and 1 Black Dye" id="50">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="Ink Sac" target="Black Dye" id="51" />
+      <edge source="Wither Rose" target="Black Dye" id="52" />
+      <edge source="Gray Dye" target="1 White Dye and 1 Gray Dye" id="53">
+        <attvalues>
+          <attvalue for="1" value="1" />
+        </attvalues>
+      </edge>
+      <edge source="1 Black Dye and 1 White Dye" target="Gray Dye" id="54" />
+      <edge source="Azure Blue" target="Light Gray Dye" id="55" />
+      <edge source="Oxeye Daisy" target="Light Gray Dye" id="56" />
+      <edge source="White Tulip" target="Light Gray Dye" id="57" />
+      <edge source="2 White Dye and 1 Black Dye" target="Light Gray Dye" id="58" />
+      <edge source="1 White Dye and 1 Gray Dye" target="Light Gray Dye" id="59" />
+      <edge source="Bone Meal" target="White Dye" id="60" />
+      <edge source="Lily of the Valley" target="White Dye" id="61" />
+    </edges>
+  </graph>
+</gexf>
