@@ -3,37 +3,35 @@
 
 # exclude everything except text-based OC directories
 /*
+!/data
 !/ipynb
+!/json
 !/load_magic
 !/ps1
 !/py
 !/saves
-!/data
 !/sh
 !/tests
-!/json
 
 # Ignore whole folders
 **/.git/
-saves/mp4
 data/zip
+saves/mp4
 
 # Ignore minecraft files
-data/*_Default_Resource_Pack/assets/.mcassetsroot
-data/*_Default_Resource_Pack/assets/**/*.json
-data/*_Default_Resource_Pack/assets/**/*.bin
-data/*_Default_Resource_Pack/assets/**/*.properties
-data/*_Default_Resource_Pack/assets/**/*.png
-data/*_Default_Resource_Pack/assets/**/*.png.mcmeta
-data/*_Default_Resource_Pack/assets/**/*.ogg
-data/*_Default_Resource_Pack/*.txt
-data/*_Default_Resource_Pack/*.mcmeta
-data/*_Default_Resource_Pack/*.png
-data/*_Default_Resource_Pack/assets/**/*.fsh
-data/*_Default_Resource_Pack/assets/**/*.vsh
-data/*_Default_Resource_Pack/assets/**/*.glsl
-data/*_Default_Resource_Pack/assets/**/*.txt
 data/*_Default_Resource_Pack/*.json
+data/*_Default_Resource_Pack/*.mcmeta
+data/*_Default_Resource_Pack/*.txt
+data/*_Default_Resource_Pack/assets/**/*.bin
+data/*_Default_Resource_Pack/assets/**/*.fsh
+data/*_Default_Resource_Pack/assets/**/*.glsl
+data/*_Default_Resource_Pack/assets/**/*.json
+data/*_Default_Resource_Pack/assets/**/*.mcmeta
+data/*_Default_Resource_Pack/assets/**/*.ogg
+data/*_Default_Resource_Pack/assets/**/*.properties
+data/*_Default_Resource_Pack/assets/**/*.txt
+data/*_Default_Resource_Pack/assets/**/*.vsh
+data/*_Default_Resource_Pack/assets/.mcassetsroot
 
 # Ignore big files (GitHub will warn you when pushing files larger than 50 MB. You will not be allowed to
 # push files larger than 100 MB.) Tip: If you regularly push large files to GitHub, consider introducing
