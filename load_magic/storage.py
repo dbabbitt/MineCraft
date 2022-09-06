@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
+
+# Soli Deo gloria
+
+
+
 try:
     import pickle5 as pickle
 except:

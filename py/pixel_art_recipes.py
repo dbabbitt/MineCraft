@@ -4,13 +4,19 @@
 # Dave Babbitt <dave.babbitt@gmail.com>
 # Author: Dave Babbitt, Data Scientist
 # coding: utf-8
+
+# Soli Deo gloria
+
 """
 PixelArtRecipies: A set of utility functions common to building MineCraft pixel art
 """
 from IPython.display import HTML, display
 from PIL import Image
+from math import sqrt
 from matplotlib.colors import to_hex
 from pathlib import Path
+import cv2
+import imageio
 import itertools
 import math
 import numpy as np
@@ -20,13 +26,14 @@ import pandas as pd
 import storage as s
 import traceback
 import webbrowser
+import webcolors
 
 import warnings
 warnings.filterwarnings("ignore")
 
 class PixelArtRecipies(object):
     """This class implements the core of the utility functions
-    needed to play wordle.
+    needed to build pixel art in MineCraft.
 
     Examples
     --------
@@ -37,9 +44,13 @@ class PixelArtRecipies(object):
     >>> par = pixel_art_recipes.PixelArtRecipies()
     """
 
-    def __init__(self):
+    def __init__(self, textures_dir=None):
         self.s = s.Storage()
-        self.textures_dir = '../data/1.18.1_Default_Resource_Pack/assets/minecraft/textures/block'
+        if textures_dir is None:
+            # self.textures_dir = '../data/1.18.1_Default_Resource_Pack/assets/minecraft/textures/block'
+            self.textures_dir = '../data/pixelart_textures'
+        else:
+            self.textures_dir = textures_dir
         
         # Get RGB dictionaries
         if self.s.pickle_exists('AVERAGE_DICT') and self.s.pickle_exists('DOMINANT_DICT') and self.s.pickle_exists('WEIGHTED_AVERAGE_DICT'):
@@ -47,46 +58,7 @@ class PixelArtRecipies(object):
             self.dominant_dict = self.s.load_object('DOMINANT_DICT')
             self.weighted_average_dict = self.s.load_object('WEIGHTED_AVERAGE_DICT')
         else:
-            def get_dictionaries(textures_dir, n_colors=5):
-                average_dict = {}
-                dominant_dict = {}
-                weighted_dict = {}
-                for file_name in os.listdir(textures_dir):
-                    if file_name.endswith('.png'):
-                        
-                        # Read the image
-                        file_path = os.path.join(textures_dir, file_name)
-                        try:
-                            img_array = io.imread(file_path)[:, :, :3]
-                            if img_array.shape == (16, 16, 3):
-                                
-                                # Calculate the mean of each chromatic channel
-                                average = img_array.mean(axis=0).mean(axis=0)
-                                average_dict[file_name] = tuple(average)
-                                
-                                # Get the palette color which occurs most frequently
-                                criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 200, .1)
-                                flags = cv2.KMEANS_RANDOM_CENTERS
-                                pixels = np.float32(img_array.reshape(-1, 3))
-                                _, labels, palette = cv2.kmeans(pixels, n_colors, None, criteria, 10, flags)
-                                _, counts = np.unique(labels, return_counts=True)
-                                dominant = palette[np.argmax(counts)]
-                                dominant_dict[file_name] = tuple(dominant)
-                                
-                                # Calculate the mean of the palette patch
-                                indices = np.argsort(counts)[::-1]   
-                                freqs = np.cumsum(np.hstack([[0], counts[indices]/float(counts.sum())]))
-                                rows = np.int_(img_array.shape[0]*freqs)
-                                palette_patch = np.zeros(shape=img_array.shape, dtype=np.uint8)
-                                for i in range(len(rows) - 1):
-                                    palette_patch[rows[i]:rows[i + 1], :, :] += np.uint8(palette[indices[i]])
-                                weighted_average = palette_patch.mean(axis=0).mean(axis=0)
-                                weighted_dict[file_name] = tuple(weighted_average)
-                        except IndexError as e:
-                            print(f'{file_name}: {str(e).strip()}')
-                
-                return average_dict, dominant_dict, weighted_dict
-            self.average_dict, self.dominant_dict, self.weighted_average_dict = get_dictionaries(self.textures_dir, n_colors=5)
+            self.average_dict, self.dominant_dict, self.weighted_average_dict = self.get_dictionaries(self.textures_dir, n_colors=5)
             self.s.store_objects(AVERAGE_DICT=self.average_dict, DOMINANT_DICT=self.dominant_dict, WEIGHTED_AVERAGE_DICT=self.weighted_average_dict)
         
         # Get various block lists
@@ -158,75 +130,76 @@ class PixelArtRecipies(object):
         if self.s.pickle_exists('minecraft_blocks_list'):
             self.blocks_list = self.s.load_object('minecraft_blocks_list')
         else:
-            self.blocks_list = ['acacia_log.png', 'acacia_log_top.png', 'acacia_planks.png',
-                           'andesite.png', 'birch_log.png', 'birch_log_top.png',
-                           'birch_planks.png', 'black_concrete.png', 'black_concrete_powder.png',
-                           'black_glazed_terracotta.png', 'black_terracotta.png', 'black_wool.png',
-                           'blue_concrete.png', 'blue_concrete_powder.png', 'blue_glazed_terracotta.png',
-                           'blue_terracotta.png', 'blue_wool.png', 'bone_block_side.png',
-                           'bone_block_top.png', 'bookshelf.png', 'bricks.png',
-                           'brown_concrete.png', 'brown_concrete_powder.png', 'brown_glazed_terracotta.png',
-                           'brown_terracotta.png', 'brown_wool.png', 'chiseled_nether_bricks.png',
-                           'chiseled_quartz_block.png', 'chiseled_quartz_block_top.png',
-                           'chiseled_red_sandstone.png',
-                           'chiseled_sandstone.png', 'chiseled_stone_bricks.png', 'coal_block.png',
-                           'coal_ore.png', 'cobblestone.png', 'cracked_nether_bricks.png',
-                           'cracked_stone_bricks.png', 'cyan_concrete.png', 'cyan_concrete_powder.png',
-                           'cyan_glazed_terracotta.png', 'cyan_terracotta.png', 'cyan_wool.png',
-                           'dark_oak_log.png', 'dark_oak_log_top.png', 'dark_oak_planks.png',
-                           'dark_prismarine.png', 'diamond_block.png', 'diorite.png',
-                           'dirt.png', 'emerald_block.png', 'end_stone.png',
-                           'end_stone_bricks.png', 'furnace_front.png', 'furnace_side.png',
-                           'furnace_top.png', 'granite.png', 'grass_block_side.png',
-                           'gravel.png', 'gray_concrete.png', 'gray_concrete_powder.png',
-                           'gray_glazed_terracotta.png', 'gray_terracotta.png', 'gray_wool.png',
-                           'green_concrete.png', 'green_concrete_powder.png',
-                           'green_glazed_terracotta.png',
-                           'green_terracotta.png', 'green_wool.png', 'hay_block_side.png',
-                           'hay_block_top.png', 'iron_block.png', 'iron_ore.png',
-                           'jack_o_lantern.png', 'jungle_log.png', 'jungle_log_top.png',
-                           'jungle_planks.png', 'lapis_block.png', 'light_blue_concrete.png',
-                           'light_blue_concrete_powder.png', 'light_blue_glazed_terracotta.png',
-                           'light_blue_terracotta.png',
-                           'light_blue_wool.png', 'light_gray_concrete.png',
-                           'light_gray_concrete_powder.png',
-                           'light_gray_glazed_terracotta.png', 'light_gray_terracotta.png',
-                           'light_gray_wool.png',
-                           'lime_concrete.png', 'lime_concrete_powder.png', 'lime_glazed_terracotta.png',
-                           'lime_terracotta.png', 'lime_wool.png', 'magenta_concrete.png',
-                           'magenta_concrete_powder.png', 'magenta_glazed_terracotta.png',
-                           'magenta_terracotta.png',
-                           'magenta_wool.png', 'melon_side.png', 'melon_top.png',
-                           'mossy_cobblestone.png', 'mossy_stone_bricks.png', 'netherite_block.png',
-                           'netherrack.png', 'nether_bricks.png', 'nether_quartz_ore.png',
-                           'nether_wart_block.png', 'note_block.png', 'oak_log.png',
-                           'oak_log_top.png', 'oak_planks.png', 'orange_concrete.png',
-                           'orange_concrete_powder.png', 'orange_glazed_terracotta.png',
-                           'orange_terracotta.png',
-                           'orange_wool.png', 'packed_ice.png', 'pink_concrete.png',
-                           'pink_concrete_powder.png', 'pink_glazed_terracotta.png', 'pink_terracotta.png',
-                           'pink_wool.png', 'piston_side.png', 'piston_top.png',
-                           'piston_top_sticky.png', 'podzol_side.png', 'polished_andesite.png',
-                           'polished_diorite.png', 'polished_granite.png', 'prismarine_bricks.png',
-                           'pumpkin_side.png', 'pumpkin_top.png', 'purple_concrete.png',
-                           'purple_concrete_powder.png', 'purple_glazed_terracotta.png',
-                           'purple_terracotta.png',
-                           'purple_wool.png', 'purpur_block.png', 'purpur_pillar.png',
-                           'purpur_pillar_top.png', 'quartz_block_side.png', 'quartz_block_top.png',
-                           'quartz_bricks.png', 'quartz_pillar.png', 'quartz_pillar_top.png',
-                           'redstone_block.png', 'redstone_lamp.png', 'redstone_ore.png',
-                           'red_concrete.png', 'red_concrete_powder.png', 'red_glazed_terracotta.png',
-                           'red_nether_bricks.png', 'red_sand.png', 'red_sandstone.png',
-                           'red_sandstone_top.png', 'red_terracotta.png', 'red_wool.png',
-                           'sand.png', 'sandstone.png', 'sandstone_top.png',
-                           'slime_block.png', 'smooth_stone.png', 'smooth_stone_slab_side.png',
-                           'soul_sand.png', 'sponge.png', 'spruce_log.png',
-                           'spruce_log_top.png', 'spruce_planks.png', 'stone.png',
-                           'stone_bricks.png', 'terracotta.png', 'wet_sponge.png',
-                           'white_concrete.png', 'white_concrete_powder.png', 'white_glazed_terracotta.png',
-                           'white_terracotta.png', 'white_wool.png', 'yellow_concrete.png',
-                           'yellow_concrete_powder.png', 'yellow_glazed_terracotta.png',
-                           'yellow_terracotta.png', 'yellow_wool.png']
+            self.blocks_list = [
+                'acacia_log.png', 'acacia_log_top.png', 'acacia_planks.png',
+                'andesite.png', 'birch_log.png', 'birch_log_top.png',
+                'birch_planks.png', 'black_concrete.png', 'black_concrete_powder.png',
+                'black_glazed_terracotta.png', 'black_terracotta.png', 'black_wool.png',
+                'blue_concrete.png', 'blue_concrete_powder.png', 'blue_glazed_terracotta.png',
+                'blue_terracotta.png', 'blue_wool.png', 'bone_block_side.png',
+                'bone_block_top.png', 'bookshelf.png', 'bricks.png',
+                'brown_concrete.png', 'brown_concrete_powder.png', 'brown_glazed_terracotta.png',
+                'brown_terracotta.png', 'brown_wool.png', 'chiseled_nether_bricks.png',
+                'chiseled_quartz_block.png', 'chiseled_quartz_block_top.png',
+                'chiseled_red_sandstone.png',
+                'chiseled_sandstone.png', 'chiseled_stone_bricks.png', 'coal_block.png',
+                'coal_ore.png', 'cobblestone.png', 'cracked_nether_bricks.png',
+                'cracked_stone_bricks.png', 'cyan_concrete.png', 'cyan_concrete_powder.png',
+                'cyan_glazed_terracotta.png', 'cyan_terracotta.png', 'cyan_wool.png',
+                'dark_oak_log.png', 'dark_oak_log_top.png', 'dark_oak_planks.png',
+                'dark_prismarine.png', 'diamond_block.png', 'diorite.png',
+                'dirt.png', 'emerald_block.png', 'end_stone.png',
+                'end_stone_bricks.png', 'furnace_front.png', 'furnace_side.png',
+                'furnace_top.png', 'granite.png', 'grass_block_side.png',
+                'gravel.png', 'gray_concrete.png', 'gray_concrete_powder.png',
+                'gray_glazed_terracotta.png', 'gray_terracotta.png', 'gray_wool.png',
+                'green_concrete.png', 'green_concrete_powder.png',
+                'green_glazed_terracotta.png',
+                'green_terracotta.png', 'green_wool.png', 'hay_block_side.png',
+                'hay_block_top.png', 'iron_block.png', 'iron_ore.png',
+                'jack_o_lantern.png', 'jungle_log.png', 'jungle_log_top.png',
+                'jungle_planks.png', 'lapis_block.png', 'light_blue_concrete.png',
+                'light_blue_concrete_powder.png', 'light_blue_glazed_terracotta.png',
+                'light_blue_terracotta.png',
+                'light_blue_wool.png', 'light_gray_concrete.png',
+                'light_gray_concrete_powder.png',
+                'light_gray_glazed_terracotta.png', 'light_gray_terracotta.png',
+                'light_gray_wool.png',
+                'lime_concrete.png', 'lime_concrete_powder.png', 'lime_glazed_terracotta.png',
+                'lime_terracotta.png', 'lime_wool.png', 'magenta_concrete.png',
+                'magenta_concrete_powder.png', 'magenta_glazed_terracotta.png',
+                'magenta_terracotta.png',
+                'magenta_wool.png', 'melon_side.png', 'melon_top.png',
+                'mossy_cobblestone.png', 'mossy_stone_bricks.png', 'netherite_block.png',
+                'netherrack.png', 'nether_bricks.png', 'nether_quartz_ore.png',
+                'nether_wart_block.png', 'note_block.png', 'oak_log.png',
+                'oak_log_top.png', 'oak_planks.png', 'orange_concrete.png',
+                'orange_concrete_powder.png', 'orange_glazed_terracotta.png',
+                'orange_terracotta.png',
+                'orange_wool.png', 'packed_ice.png', 'pink_concrete.png',
+                'pink_concrete_powder.png', 'pink_glazed_terracotta.png', 'pink_terracotta.png',
+                'pink_wool.png', 'piston_side.png', 'piston_top.png',
+                'piston_top_sticky.png', 'podzol_side.png', 'polished_andesite.png',
+                'polished_diorite.png', 'polished_granite.png', 'prismarine_bricks.png',
+                'pumpkin_side.png', 'pumpkin_top.png', 'purple_concrete.png',
+                'purple_concrete_powder.png', 'purple_glazed_terracotta.png',
+                'purple_terracotta.png',
+                'purple_wool.png', 'purpur_block.png', 'purpur_pillar.png',
+                'purpur_pillar_top.png', 'quartz_block_side.png', 'quartz_block_top.png',
+                'quartz_bricks.png', 'quartz_pillar.png', 'quartz_pillar_top.png',
+                'redstone_block.png', 'redstone_lamp.png', 'redstone_ore.png',
+                'red_concrete.png', 'red_concrete_powder.png', 'red_glazed_terracotta.png',
+                'red_nether_bricks.png', 'red_sand.png', 'red_sandstone.png',
+                'red_sandstone_top.png', 'red_terracotta.png', 'red_wool.png',
+                'sand.png', 'sandstone.png', 'sandstone_top.png',
+                'slime_block.png', 'smooth_stone.png', 'smooth_stone_slab_side.png',
+                'soul_sand.png', 'sponge.png', 'spruce_log.png',
+                'spruce_log_top.png', 'spruce_planks.png', 'stone.png',
+                'stone_bricks.png', 'terracotta.png', 'wet_sponge.png',
+                'white_concrete.png', 'white_concrete_powder.png', 'white_glazed_terracotta.png',
+                'white_terracotta.png', 'white_wool.png', 'yellow_concrete.png',
+                'yellow_concrete_powder.png', 'yellow_glazed_terracotta.png',
+                'yellow_terracotta.png', 'yellow_wool.png']
             self.s.store_objects(minecraft_blocks_list=self.blocks_list)
         
         if self.s.pickle_exists('minecraft_wool_list'):
@@ -236,6 +209,83 @@ class PixelArtRecipies(object):
             self.s.store_objects(minecraft_wool_list=self.wool_list)
         self.unpowdered_and_unglazed_list = [fn for fn in self.concrete_and_unglazed_terracotta_list+self.wool_list if 'powder' not in fn.lower()]
         self.stained_glass_list = [key for key in self.weighted_average_dict.keys() if key.endswith('_stained_glass.png')]
+        self.horizontal_offset = -495
+        self.vertical_offset = 207
+    
+    
+    
+    def get_dictionaries(self, textures_dir, n_colors=5):
+        average_dict = {}
+        dominant_dict = {}
+        weighted_dict = {}
+        for file_name in os.listdir(textures_dir):
+            if file_name.endswith('.png'):
+
+                # Read the image
+                file_path = os.path.join(textures_dir, file_name)
+                try:
+                    img_array = imageio.imread(file_path)[:, :, :3]
+                    if img_array.shape == (16, 16, 3):
+
+                        # Calculate the mean of each chromatic channel
+                        average = img_array.mean(axis=0).mean(axis=0)
+                        average_dict[file_name] = tuple(average)
+
+                        # Get the palette color which occurs most frequently
+                        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 200, .1)
+                        flags = cv2.KMEANS_RANDOM_CENTERS
+                        pixels = np.float32(img_array.reshape(-1, 3))
+                        _, labels, palette = cv2.kmeans(pixels, n_colors, None, criteria, 10, flags)
+                        _, counts = np.unique(labels, return_counts=True)
+                        dominant = palette[np.argmax(counts)]
+                        dominant_dict[file_name] = tuple(dominant)
+
+                        # Calculate the mean of the palette patch
+                        indices = np.argsort(counts)[::-1]   
+                        freqs = np.cumsum(np.hstack([[0], counts[indices]/float(counts.sum())]))
+                        rows = np.int_(img_array.shape[0]*freqs)
+                        palette_patch = np.zeros(shape=img_array.shape, dtype=np.uint8)
+                        for i in range(len(rows) - 1):
+                            palette_patch[rows[i]:rows[i + 1], :, :] += np.uint8(palette[indices[i]])
+                        weighted_average = palette_patch.mean(axis=0).mean(axis=0)
+                        weighted_dict[file_name] = tuple(weighted_average)
+                except IndexError as e:
+                    print(f'{file_name}: {str(e).strip()}')
+                except Exception as e:
+                    print(f'{e.__class__} error on {file_name}: {str(e).strip()}')
+
+        return average_dict, dominant_dict, weighted_dict
+    
+    
+    
+    def color_distance_from(self, from_color, to_rgb_tuple):
+        if from_color == 'white':
+            green_diff = 255 - to_rgb_tuple[0]
+            blue_diff = 255 - to_rgb_tuple[1]
+            red_diff = 255 - to_rgb_tuple[2]
+            color_distance = sqrt(green_diff**2 + blue_diff**2 + red_diff**2)
+        elif from_color == 'black':
+            color_distance = sqrt(to_rgb_tuple[0]**2 + to_rgb_tuple[1]**2 + to_rgb_tuple[2]**2)
+        
+        # Assume from_color is also an RGB tuple
+        else:
+            color_distance = np.linalg.norm(np.array(from_color) - np.array(to_rgb_tuple))
+
+        return color_distance
+    
+    
+    
+    def get_text_color(self, text_color='#000000', backround_hex_str='#ffffff'):
+        if backround_hex_str != '#ffffff':
+            rbg_tuple = tuple(webcolors.hex_to_rgb(backround_hex_str))
+            text_colors_list = []
+            for color in ['white', 'black']:
+                color_tuple = (self.color_distance_from(color, rbg_tuple), color)
+                text_colors_list.append(color_tuple)
+            text_color = sorted(text_colors_list, key=lambda x: x[0])[-1][1]
+            text_color = webcolors.name_to_hex(text_color)
+
+        return text_color
     
     
     
@@ -270,15 +320,27 @@ class PixelArtRecipies(object):
     
     
     def pixel_to_filename(self, img_array, row, col, rgb_dict):
-        f = lambda item: np.linalg.norm(np.array(item[1])-img_array[row][col])
-        file_name = sorted(rgb_dict.items(), key=f)[0][0]
+        pixel = img_array[row][col]
+        if tuple(pixel) in self.pixel_to_filename_dict:
+            file_name = self.pixel_to_filename_dict[tuple(pixel)]
+        else:
+            f = lambda item: self.color_distance_from(item[1], pixel)
+            file_name = sorted(rgb_dict.items(), key=f)[0][0]
+            self.pixel_to_filename_dict[tuple(pixel)] = file_name
         
         return file_name
     
     
     
     def get_hex_str(self, rgb_dict, file_name):
-        hex_str = to_hex(list(map(lambda x: x/255, rgb_dict[file_name])))
+        def f(x):
+            if x > 255:
+                x = 1
+            else:
+                x = x/255
+            
+            return x
+        hex_str = to_hex(list(map(f, rgb_dict[file_name])))
         
         return hex_str
     
@@ -292,30 +354,26 @@ class PixelArtRecipies(object):
     
     
     def convert_rowcols_to_minecraft_coords(self, row, col):
-        x = col - 495
-        z = row + 207
+        x = col + self.horizontal_offset
+        z = row + self.vertical_offset
         
         return x, z
     
     
     
     def get_column_markup(self, img_array, rgb_dict, td_style, img_style, row, col, text_html_str,
-                          image_html_str, rows_list=[]):
+                          image_html_str):
         file_name = self.pixel_to_filename(img_array, row, col, rgb_dict)
         img_path = os.path.abspath(f'{self.textures_dir}/{file_name}')
         block_name = self.get_block_name(file_name)
         hex_str = self.get_hex_str(rgb_dict, file_name)
         x, z = self.convert_rowcols_to_minecraft_coords(row, col)
-        text_html_str += f'<td title="X:{x} Z:{z}" style="background-color:{hex_str};text-align:center;">{block_name}</td>'
+        text_color = self.get_text_color(backround_hex_str=hex_str)
+        text_html_str += f'<td title="X:{x} Z:{z}" style="background-color:{hex_str};text-align:center;color:{text_color}">{block_name}</td>'
         image_html_str += f'<td title="X:{x} Z:{z} {block_name}" style="{td_style}">'
         image_html_str += f'<img src="file:///{img_path}" style="{img_style}" /></td>'
-        row_dict = {}
-        row_dict['row_number'] = row
-        row_dict['column_number'] = col
-        row_dict['block_name'] = block_name
-        rows_list.append(row_dict)
         
-        return rows_list, text_html_str, image_html_str
+        return text_html_str, image_html_str
     
     
     
@@ -365,43 +423,42 @@ class PixelArtRecipies(object):
     
     
     
-    def get_row_markup(self, text_html_str, image_html_str, rows_list, img_array, rgb_dict, td_style,
+    def get_row_markup(self, text_html_str, image_html_str, img_array, rgb_dict, td_style,
                        img_style, file_prefix, file_path,
                        col_start=0, col_count=10, row_start=0, row_count=10):
         text_html_str += '<tr>'
         image_html_str += '<tr>'
         for col in range(col_start, col_count):
-            (rows_list, text_html_str,
-             image_html_str) = self.get_column_markup(img_array, rgb_dict, td_style, img_style, row_start,
-                                                 col, text_html_str, image_html_str, rows_list)
+            (text_html_str, image_html_str) = self.get_column_markup(img_array, rgb_dict, td_style, img_style, row_start,
+                                                                     col, text_html_str, image_html_str)
         text_html_str += '</tr>'
         if row_start==0:
             image_html_str = self.get_rowspan_markup(file_prefix, file_path, td_style, image_html_str,
                                                 row_count, col_count)
         image_html_str += '</tr>'
         
-        return text_html_str, image_html_str, rows_list
+        return text_html_str, image_html_str
     
     
     
-    def get_it_markup(self, file_path, rgb_dict, file_prefix, rows_list=[]):
+    def get_it_markup(self, file_path, rgb_dict, file_prefix):
         minecraft_pixel_art_img = Image.open(file_path)
         img_array = np.array(minecraft_pixel_art_img)
+        self.pixel_to_filename_dict = {}
         row_count = img_array.shape[0]
         col_count = img_array.shape[1]
         td_style = 'padding:0;margin:0;'
         img_style = 'display:block;margin:0!important;padding:0!important;border:0!important;'
         text_html_str = image_html_str = '<table style="border-collapse:collapse;">'
         for row in range(row_count):
-            (text_html_str, image_html_str,
-             rows_list) = self.get_row_markup(text_html_str, image_html_str, rows_list, img_array, rgb_dict,
-                                         td_style, img_style, file_prefix, file_path,
-                                         col_start=0, col_count=col_count,
-                                         row_start=row, row_count=row_count)
+            (text_html_str, image_html_str) = self.get_row_markup(text_html_str, image_html_str, img_array, rgb_dict,
+                                                                  td_style, img_style, file_prefix, file_path,
+                                                                  col_start=0, col_count=col_count,
+                                                                  row_start=row, row_count=row_count)
         text_html_str += '</table><hr />'
         image_html_str += '</table>'
         
-        return text_html_str, image_html_str, rows_list
+        return text_html_str, image_html_str
     
     
     
@@ -418,13 +475,14 @@ class PixelArtRecipies(object):
     
     
     
-    def show_art_recipe(self, file_path, rgb_dict=None, blocks_list=None):
+    def show_art_recipe(self, file_path, rgb_dict=None, blocks_list=None,
+                        block_names_df=pd.DataFrame([], columns=['row_number', 'column_number', 'file_name', 'block_name', 'hex_str']), verbose=True):
         if blocks_list is not None:
             rgb_dict = {k: v for k, v in rgb_dict.items() if k in blocks_list}
         elif rgb_dict is None:
             rgb_dict = self.weighted_average_dict
         file_prefix = file_path.split('/')[-1].split('.')[0]
-        text_html_str, image_html_str, rows_list = self.get_it_markup(file_path, rgb_dict, file_prefix)
+        text_html_str, image_html_str = self.get_it_markup(file_path, rgb_dict, file_prefix)
         display(HTML(text_html_str))
         html_path = os.path.abspath(f'../saves/html/{file_prefix}.html')
         os.makedirs(name=os.path.dirname(html_path), exist_ok=True)
@@ -434,7 +492,6 @@ class PixelArtRecipies(object):
             f.write(f'<html><head><title>{code}</title></head><body>')
             f.write(image_html_str)
             f.write('</body></html>')
-        block_names_df = pd.DataFrame(rows_list)
         if blocks_list is not None:
             mask_series = block_names_df.block_name.isin([self.get_block_name(file_name) for file_name in blocks_list])
             block_names_df = block_names_df[mask_series]
@@ -443,27 +500,27 @@ class PixelArtRecipies(object):
         block_names_list = []
         for block_name, block_count in block_names_series.iteritems():
             stacks_list, summary_str = self.get_stack_summary(block_count, block_name, stacks_list)
-            print(summary_str)
+            if verbose:
+                print(summary_str)
             block_names_list.append(block_name)
-        print()
+        if verbose:
+            print()
         for stack_count, blocks_list in self.collate(stacks_list):
             stack_collation = self.get_stack_collation(blocks_list, stack_count)
-            print(stack_collation)
+            if verbose:
+                print(stack_collation)
         webbrowser.open(html_path, new=2)
-        
-        return block_names_df
     
     
     
     def get_next_recipe(self, file_path='../saves/png/visual_construction101x101.png'):
-        block_names_df = self.show_art_recipe(file_path, rgb_dict=self.dominant_dict, blocks_list=self.unpowdered_and_unglazed_list+self.stained_glass_list)
-        
-        return block_names_df
+        self.show_art_recipe(file_path, rgb_dict=self.dominant_dict, blocks_list=self.unpowdered_and_unglazed_list+self.stained_glass_list)
     
     
     
     def get_file_names_dataframe(self, file_path, rgb_dict):
         img_array = np.array(Image.open(file_path))
+        self.pixel_to_filename_dict = {}
         row_count = img_array.shape[0]
         col_count = img_array.shape[1]
         rows_list = []
@@ -527,16 +584,16 @@ class PixelArtRecipies(object):
     
     
     def convert_minecraft_coords_to_rowcols(self, x, z):
-        col = x + 495
-        row = z - 207
+        col = x - self.horizontal_offset
+        row = z - self.vertical_offset
         
         return row, col
     
     
     
     def convert_minecraft_coords_to_gimp_coords(self, x, z):
-        row = x + 495
-        col = z - 207
+        row = x - self.horizontal_offset
+        col = z - self.vertical_offset
         
         return row, col
     
